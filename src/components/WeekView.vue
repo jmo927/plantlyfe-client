@@ -44,9 +44,9 @@ export default {
       return this.weekInfo[6].toDateString();
     }
   },
-  mounted() {
-    console.log("Week View");
-  }
+  // mounted() {
+  //   // stuff
+  // }
   // methods: {
   //   buildWeek() {
   //       //stuff
