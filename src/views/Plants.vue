@@ -60,10 +60,10 @@ export default {
       };
 
       if (isNaN(data.waterAfter)) {
-        console.log("try again");
+        // stuff
       } else {
-        const response = await PlantService.addPlant(data);
-        console.log(response.data);
+        await PlantService.addPlant(data);
+        // console.log(response.data);
       }
 
       this.newPlantName = "";
@@ -71,9 +71,7 @@ export default {
       this.getPlants();
     },
     async deletePlant(e) {
-      console.log(e.target.dataset.id);
-      const response = await PlantService.deletePlant(e.target.dataset.id);
-      console.log(response);
+      await PlantService.deletePlant(e.target.dataset.id);
       this.getPlants();
     }
   }
