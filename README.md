@@ -3,6 +3,8 @@
 This is the client side of the PlantLyfe Plant Watering Scheduler. 
 The server-side code can be found [here](https://github.com/jmo927/plantlyfe-server).
 
+Deployed Project: https://plantlyfe.herokuapp.com/
+
 ## Using PlantLyfe
 
 PlantLyfe comes with a number of plants pre-loaded into the database.  You can add more plants or remove unwanted plants in the **Plants** page. Remember to input how often (in days) the plant needs water!
