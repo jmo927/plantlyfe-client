@@ -44,14 +44,6 @@ export default {
       return this.weekInfo[6].toDateString();
     }
   },
-  // mounted() {
-  //   // stuff
-  // }
-  // methods: {
-  //   buildWeek() {
-  //       //stuff
-  //   },
-  // }
 };
 </script>
 

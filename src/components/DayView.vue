@@ -2,15 +2,11 @@
   <div class="DayView">
     <div class="day-header">
       <h3 class="day-name">{{ weekdayStr }}</h3>
-      <!-- <h4 class="wd">{{ weekday }}</h4> -->
       <h4 class="day-date">{{ dateStr }}</h4>
-      <!-- <p>{{ date.slice(4, 10) }}</p> -->
     </div>
     <div class="day-content" :class="weekdayStr">
       <div v-if="isYesterday">
         <span v-if="isWeekday">You should have watered these already.</span>
-
-        <!-- <span>{{isWeekday}}</span> -->
       </div>
 
       <div class="day-plant-wrap" v-if="!isYesterday">
@@ -73,9 +69,6 @@ export default {
     return {
       allPlants: [],
       updateText: ""
-      // dayPlants: [],
-      // latePlants: [],
-      // satSunPlants: [],
     };
   },
   computed: {
@@ -107,7 +100,7 @@ export default {
     },
     plants: function() {
       let output = [];
-      //check which plants are due today.
+      //check which plants are due today.  But only on weekdays.
       if (this.weekday > 0 && this.weekday < 6) {
         for (let i = 0; i < this.allPlants.length; i++) {
           const tmpDay = this.allPlants[i].lastWater;
@@ -124,7 +117,7 @@ export default {
     weekendPlants: function() {
       let output = [];
 
-      // not dry becuase v-if and v-for are ill-advised
+      // not dry becuase v-if and v-for are ill-advised so says the internet
 
       if (this.weekday === 1) {
         for (let i = 0; i < this.allPlants.length; i++) {
@@ -160,7 +153,6 @@ export default {
       if (this.isToday) {
         // tried array.map but it wasn't working as expected so going old-school
         for (let i = 0; i < this.allPlants.length; i++) {
-          // console.log(this.allPlants[i])
           const dayDiff = this.getDayDiff(this.allPlants[i].lastWater);
 
           if (dayDiff > this.allPlants[i].waterAfter) {
@@ -171,6 +163,7 @@ export default {
 
       return output;
     },
+    // Make sure we load those water btns
     isToday: function() {
       let today = new Date();
       if (this.date.toDateString() === today.toDateString()) {
@@ -179,6 +172,7 @@ export default {
         return false;
       }
     },
+    // Well, any day before today, really
     isYesterday: function() {
       let today = new Date();
 
@@ -190,7 +184,6 @@ export default {
       } else {
         return false;
       }
-      // return true;
     },
     isWeekday: function () {
       if (this.weekday === 0 || this.weekday === 6) {
@@ -206,25 +199,7 @@ export default {
       const response = await PlantService.fetchAllPlants();
       this.allPlants = response.data.plants;
     },
-    // async getDayPlants() {
-    //   const response = await PlantService.fetchDayPlants(this.fullDateStr);
-    //   this.dayPlants = response.data;
-
-    // },
-    // async getWeekendPlants() {
-    //   const tmpDay = this.date;
-    //   const thisDay = this.date.getDate();
-    //   if (this.weekday === 1) {
-    //     tmpDay.setDate(thisDay - 1)
-    //   }
-    //   if (this.weekday === 5) {
-    //     tmpDay.setDate(thisDay + 1);
-    //   }
-    //   let tmpDayStr = tmpDay.toDateString();
-    //   const response = await PlantService.fetchDayPlants(tmpDayStr);
-    //   this.weekendPlants = response.data;
-
-    // },
+    // Reuseable function to help with date-math
     getDayDiff(data) {
       const baseDay = new Date(data);
       const now = baseDay.getTime();
@@ -235,6 +210,7 @@ export default {
 
       return dayDiff;
     },
+    // When you click that water btn
     async triggerUpdate(e) {
       e.preventDefault();
       await PlantService.updatePlant(e.target.dataset.id);
@@ -292,9 +268,6 @@ ul {
 
 .DayView {
   width: 170px;
-  /* border: 1px solid black; */
-  /* max-height: 400px;
-        overflow: auto; */
 }
 
 .plant {
@@ -314,8 +287,9 @@ ul {
 }
 
 .update-btn {
-  padding: 0px;
+  padding: 4px;
   display: block;
+  background-color: #f1fcf7;
 }
 
 .update-text {

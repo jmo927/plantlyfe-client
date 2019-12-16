@@ -52,11 +52,10 @@ export default {
       newDay.setDate(newDay.getDate() + 1);
 
       let newWeek = [];
-
+      // add 7 days worth of Date objs.
       for (let i = 0; i < 7; i++) {
         let next = new Date(newDay);
         next.setDate(next.getDate() + i);
-        // newWeek.push(next.toDateString());
         newWeek.push(next);
       }
 
@@ -67,7 +66,6 @@ export default {
       } else if (wL === 11) {
         this.isBuilt = true;
       }
-      // console.log(w);
       return w;
     },
     buildWeekOne() {
@@ -78,11 +76,11 @@ export default {
 
       let adder = 0;
 
+      // let's build a week
       for (let i = tmpDay; i < week.length; i++) {
         let next = new Date();
         next.setDate(next.getDate() + adder);
         week[i] = next;
-        // week[i] = next.toDateString();
         adder++;
       }
 
@@ -92,17 +90,14 @@ export default {
           let prev = new Date();
           prev.setDate(prev.getDate() - adder);
           week[i] = prev;
-          // week[i] = prev.toDateString();
           adder++;
         }
       }
-
-      // this.thisWeek = week;
       return week;
     },
     checkCarousel(e) {
       const move = e.target.dataset.move;
-
+      // check page of carousel
       if (move === "next") {
         if (this.pageWeek < 11) {
           this.pageWeek++;
@@ -113,6 +108,7 @@ export default {
         }
       }
 
+      // update buttons via psuedo-state.
       if (this.pageWeek === 0) {
         this.atFirstCar = true;
         this.atLastCar = false;
@@ -133,11 +129,6 @@ export default {
       this.weeks.push(output);
       this.buildAnotherWeek();
     },
-    // async getPlants() {
-    //   const response = await PlantService.fetchPlants();
-    //   this.plants = response.data;
-    //   this.fireItUp();
-    // }
   }
 };
 </script>
@@ -150,18 +141,6 @@ h1 {
   margin-left: 15px;
   margin-right: 15px;
 }
-
-/* button {
-  margin: 5px;
-  background-color: #b2ef9b;
-  border-radius: 5px;
-  border: 0px;
-  padding: 3px;
-}
-
-button:hover {
-  cursor: pointer;
-} */
 
 .content-row {
   display: flex;
